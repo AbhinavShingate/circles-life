@@ -1,4 +1,4 @@
-package com.Circles.circlesAutomation.pageLibrary;
+package pageLibrary;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

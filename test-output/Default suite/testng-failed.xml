@@ -3,12 +3,12 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.Circles.circlesAutomation.testScripts.TS001_LoginExistingCustomer">
+      <class name="testScripts.TS002_NewOrderwithoutAddOn">
         <methods>
-          <include name="setup"/>
-          <include name="testLogin"/>
+          <include name="Setup"/>
+          <include name="newOrderWithoutAddOn"/>
         </methods>
-      </class> <!-- com.Circles.circlesAutomation.testScripts.TS001_LoginExistingCustomer -->
+      </class> <!-- testScripts.TS002_NewOrderwithoutAddOn -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

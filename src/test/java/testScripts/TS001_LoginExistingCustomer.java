@@ -1,4 +1,4 @@
-package com.Circles.circlesAutomation.testScripts;
+package testScripts;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,7 +10,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.Circles.circlesAutomation.pageLibrary.Login;
+import pageLibrary.Login;
 
 @Test
 public class TS001_LoginExistingCustomer {

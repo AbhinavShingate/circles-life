@@ -1,13 +1,17 @@
-package com.Circles.circlesAutomation.testScripts;
+package testScripts;
+
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.Circles.circlesAutomation.pageLibrary.ChooseNumberPage;
-import com.Circles.circlesAutomation.pageLibrary.Login;
-import com.Circles.circlesAutomation.pageLibrary.PlanPage;
+import pageLibrary.ChooseNumberPage;
+import pageLibrary.DeliveryInfoPage;
+import pageLibrary.Login;
+import pageLibrary.PlanPage;
+import pageLibrary.PreCheckoutPage;
 
 @Test
 public class TS002_NewOrderwithoutAddOn {
@@ -16,6 +20,8 @@ public class TS002_NewOrderwithoutAddOn {
 	PlanPage planPage;
 	WebDriver driver;
 	ChooseNumberPage chooseNumberPage;
+	PreCheckoutPage preCheckoutPage;
+	DeliveryInfoPage deliveryInfoPage;
 	
     @BeforeClass
     void Setup() {
@@ -35,13 +41,17 @@ public class TS002_NewOrderwithoutAddOn {
     }
     
     @Test
-    void newOrderWithoutAddOn() {
+    void newOrderWithoutAddOn() throws InterruptedException {
     	planPage = new PlanPage(driver);
     	chooseNumberPage = new ChooseNumberPage(driver);
+    	preCheckoutPage = new PreCheckoutPage(driver);
+    	deliveryInfoPage = new DeliveryInfoPage(driver);
+    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	planPage.clickOnKeepOldNumber();
-    	
-        chooseNumberPage.getAGoldenNumber();
-		
+    	chooseNumberPage.getAGoldenNumber();
+        planPage.clickOnBuyThisPlan();
+		preCheckoutPage.clickOnSecureCheckout();
+		deliveryInfoPage.enterDeliveryInfo();
     }
 	
 }
