@@ -1,5 +1,6 @@
 package testScripts;
 
+import java.awt.AWTException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,8 @@ import org.testng.annotations.Test;
 import pageLibrary.ChooseNumberPage;
 import pageLibrary.DeliveryInfoPage;
 import pageLibrary.Login;
+import pageLibrary.OrderSummaryPage;
+import pageLibrary.PaymentPage;
 import pageLibrary.PlanPage;
 import pageLibrary.PreCheckoutPage;
 
@@ -22,6 +25,8 @@ public class TS002_NewOrderwithoutAddOn {
 	ChooseNumberPage chooseNumberPage;
 	PreCheckoutPage preCheckoutPage;
 	DeliveryInfoPage deliveryInfoPage;
+	OrderSummaryPage orderSummaryPage;
+	PaymentPage paymentPage;
 	
     @BeforeClass
     void Setup() {
@@ -41,17 +46,28 @@ public class TS002_NewOrderwithoutAddOn {
     }
     
     @Test
-    void newOrderWithoutAddOn() throws InterruptedException {
+    void newOrderWithoutAddOn() throws InterruptedException, AWTException {
     	planPage = new PlanPage(driver);
     	chooseNumberPage = new ChooseNumberPage(driver);
     	preCheckoutPage = new PreCheckoutPage(driver);
     	deliveryInfoPage = new DeliveryInfoPage(driver);
+    	orderSummaryPage = new OrderSummaryPage(driver);
+    	paymentPage = new PaymentPage(driver);
+    	
     	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	planPage.clickOnKeepOldNumber();
     	chooseNumberPage.getAGoldenNumber();
         planPage.clickOnBuyThisPlan();
 		preCheckoutPage.clickOnSecureCheckout();
 		deliveryInfoPage.enterDeliveryInfo();
+		orderSummaryPage.clickOnPayNow();
+		paymentPage.enterCreditCardDetils();
+		
     }
 	
+    
+       
+    
+    
+    
 }

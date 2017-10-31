@@ -24,5 +24,9 @@ public class PlanPage {
 	
 	public void clickOnBuyThisPlan() {
 		driver.findElement(buyThisPlan).click();
+		
+		
+			
+		
 	}
 }

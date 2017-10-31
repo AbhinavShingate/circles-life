@@ -1,10 +1,16 @@
 package pageLibrary;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.support.ui.Select;
 
 public class DeliveryInfoPage {
@@ -21,10 +27,10 @@ public class DeliveryInfoPage {
 	By delivaryDay = By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/div[2]/div/div/div/div[2]/div[2]/div[2]/div[4]/div[1]/div[2]/div[4]/div");
 	By deliveryTime = By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/div[2]/div/div/div/div[2]/div[2]/div[2]/div[4]/div[2]/div/div[1]/div/span/span[3]");
 	By idType= By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/div[2]/div/div/div/div[4]/div[2]/div[1]/div/div/select");
-	By frontImage = By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/div[2]/div/div/div/div[4]/div[2]/div[3]/div[2]/div[1]/div/div/img");
+	By frontImage = By.cssSelector("#st-container > div > div > div:nth-child(2) > span > div > div:nth-child(2) > div > div > div > div:nth-child(4) > div:nth-child(2) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1) > div");
 	By backImage = By.cssSelector("#st-container > div > div > div:nth-child(2) > span > div > div:nth-child(2) > div > div > div > div:nth-child(4) > div:nth-child(2) > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) > div");
 	By nic = By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/div[2]/div/div/div/div[4]/div[2]/div[2]/div/div/div/div[2]/input");
-	
+	By sceureCheckOut = By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/footer/div/div/div/div");
 	
 	public DeliveryInfoPage(WebDriver driver) {
 		this.driver = driver;
@@ -46,7 +52,7 @@ public class DeliveryInfoPage {
 		
 	}
 	
-	public void enterDeliveryInfo() throws InterruptedException {
+	public void enterDeliveryInfo() throws InterruptedException, AWTException {
 		driver.findElement(fullName).sendKeys("Testing");
 		driver.findElement(contactNmber).sendKeys("88378826");
 		selectDob();
@@ -73,13 +79,37 @@ public class DeliveryInfoPage {
 		Thread.sleep(1000);
 		driver.findElement(delivaryDay).click();
 		driver.findElement(deliveryTime).click();
-		//driver.findElement(frontImage).click();
-		
-		//driver.findElement(frontImage).sendKeys("//home//abhinav_shingate//eclipse-workspace//Circles.life//velotio.png");
+	   // driver.findElement(frontImage).click();
+		WebElement backimg = driver.findElement(backImage);
+		WebElement frontimg = driver.findElement(frontImage);
+		//driver.findElement(backImage).sendKeys("//home//abhinav_shingate//eclipse-workspace//Circles.life//velotio.png");
 		Thread.sleep(1000);
-		
-		
-		
+		Actions builder = new Actions(driver);
+		Actions series = builder
+				.moveToElement(frontimg)
+				.click();
+				series.perform();
+				
+				Robot r = new Robot();
+		    	r.keyPress(KeyEvent.VK_ENTER);
+				r.keyRelease(KeyEvent.VK_ENTER);
+				r.keyPress(KeyEvent.VK_ENTER);
+				r.keyRelease(KeyEvent.VK_ENTER);
+				//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+				
+				Actions builder1 = new Actions(driver);
+				Actions series1 = builder1
+						.moveToElement(backimg)
+						.click();
+						series1.perform();
+						
+						Robot r1 = new Robot();
+				    	r1.keyPress(KeyEvent.VK_ENTER);
+						r1.keyRelease(KeyEvent.VK_ENTER);
+						r1.keyPress(KeyEvent.VK_ENTER);
+				        r1.keyRelease(KeyEvent.VK_ENTER);
+				        
+				 driver.findElement(sceureCheckOut).click();      
 	}
 	
 }
