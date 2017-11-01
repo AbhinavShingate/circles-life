@@ -11,7 +11,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class DeliveryInfoPage {
 	
@@ -52,6 +56,46 @@ public class DeliveryInfoPage {
 		
 	}
 	
+	public void uploadFrontAndBackImage() throws InterruptedException, AWTException {
+		WebElement backimg = driver.findElement(backImage);
+		WebElement frontimg = driver.findElement(frontImage);
+		Thread.sleep(5000);
+		Actions builder = new Actions(driver);
+		Actions series = builder
+				.moveToElement(frontimg)
+				.click();
+		        series.perform();
+		Thread.sleep(5000);
+		
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_ENTER);
+		r.keyRelease(KeyEvent.VK_ENTER);
+	    Thread.sleep(5000);
+	    r.keyPress(KeyEvent.VK_ENTER);
+		r.keyRelease(KeyEvent.VK_ENTER);
+		r.keyPress(KeyEvent.VK_ENTER);
+		r.keyRelease(KeyEvent.VK_ENTER);
+		Thread.sleep(5000);
+								
+		Actions builder1 = new Actions(driver);
+		Actions series1 = builder1
+						.moveToElement(backimg)
+						.click();
+						series1.perform();
+	    Thread.sleep(5000);	
+						
+						
+		Robot r1 = new Robot();
+		r1.keyPress(KeyEvent.VK_ENTER);
+		r1.keyRelease(KeyEvent.VK_ENTER);
+		Thread.sleep(5000);
+		r1.keyPress(KeyEvent.VK_ENTER);
+		r1.keyRelease(KeyEvent.VK_ENTER);
+							        
+	    Thread.sleep(5000);
+		
+	}
+	
 	public void enterDeliveryInfo() throws InterruptedException, AWTException {
 		driver.findElement(fullName).sendKeys("Testing");
 		driver.findElement(contactNmber).sendKeys("88378826");
@@ -59,57 +103,21 @@ public class DeliveryInfoPage {
 		driver.findElement(postalCode).sendKeys("555231");;
 		driver.findElement(houseNo).sendKeys("34R");
 		driver.findElement(streetName).sendKeys("MG Road");
-		//driver.findElement(delivaryDay).click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		//driver.findElement(deliveryTime).click();
 		WebElement id = driver.findElement(idType);
 		Select dropdownIdType = new Select(id);
 		dropdownIdType.selectByIndex(1);
 		driver.findElement(nic).sendKeys("S1467255I");
-		//driver.findElement(frontImage).click();
-		
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		//WebElement img = driver.findElement(frontImage);
-		//img.sendKeys("/home/abhinav_shingate/Pictures/velotio.png");
-		
-		//String workingDir = System.getProperty("user.dir");
-		//String filepath = workingDir + "//SeleniumWebdriverUploadFile.html";
-		//driver.get(filepath);
-		
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		driver.findElement(delivaryDay).click();
+		//Wait wait = new WebDriverWait(driver, 10);
+		//wait.until(ExpectedConditions.elementToBeClickable(deliveryTime));
+		Thread.sleep(3000);
 		driver.findElement(deliveryTime).click();
-	   // driver.findElement(frontImage).click();
-		WebElement backimg = driver.findElement(backImage);
-		WebElement frontimg = driver.findElement(frontImage);
-		//driver.findElement(backImage).sendKeys("//home//abhinav_shingate//eclipse-workspace//Circles.life//velotio.png");
-		Thread.sleep(1000);
-		Actions builder = new Actions(driver);
-		Actions series = builder
-				.moveToElement(frontimg)
-				.click();
-				series.perform();
-				
-				Robot r = new Robot();
-		    	r.keyPress(KeyEvent.VK_ENTER);
-				r.keyRelease(KeyEvent.VK_ENTER);
-				r.keyPress(KeyEvent.VK_ENTER);
-				r.keyRelease(KeyEvent.VK_ENTER);
-				//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				
-				Actions builder1 = new Actions(driver);
-				Actions series1 = builder1
-						.moveToElement(backimg)
-						.click();
-						series1.perform();
-						
-						Robot r1 = new Robot();
-				    	r1.keyPress(KeyEvent.VK_ENTER);
-						r1.keyRelease(KeyEvent.VK_ENTER);
-						r1.keyPress(KeyEvent.VK_ENTER);
-				        r1.keyRelease(KeyEvent.VK_ENTER);
-				        
-				 driver.findElement(sceureCheckOut).click();      
+	    uploadFrontAndBackImage();
+				 
+	    driver.findElement(sceureCheckOut).click();    
 	}
 	
 }
