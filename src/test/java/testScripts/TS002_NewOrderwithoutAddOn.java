@@ -62,13 +62,13 @@ public class TS002_NewOrderwithoutAddOn {
 		preCheckoutPage.clickOnSecureCheckout();
 		deliveryInfoPage.enterDeliveryInfo();
 		orderSummaryPage.clickOnPayNow();
+		Thread.sleep(2000);
 		paymentPage.enterCreditCardDetils();
 		
     }
     
     
-        
-    
+      
     
        
 }

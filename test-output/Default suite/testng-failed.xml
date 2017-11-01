@@ -3,12 +3,12 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="testScripts.TS002_NewOrderwithoutAddOn">
+      <class name="testScripts.TS003_ProcessOrderOnAdminPortal">
         <methods>
-          <include name="Setup"/>
-          <include name="newOrderWithoutAddOn"/>
+          <include name="login"/>
+          <include name="setup"/>
         </methods>
-      </class> <!-- testScripts.TS002_NewOrderwithoutAddOn -->
+      </class> <!-- testScripts.TS003_ProcessOrderOnAdminPortal -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
