@@ -19,6 +19,7 @@ public class ThankYouPage {
 	WebDriver driver;
 	
 	By orderId = By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/div/div[2]/div/div/div/div/div[4]/div/span[2]");
+	By orderNumber = By.cssSelector(".row:nth-child(2) .col-xs-12 div div div div:nth-child(4) div span:nth-child(2)");
 	
 	public ThankYouPage(WebDriver driver) {
 		
@@ -69,7 +70,8 @@ public void writeOrderInExcel(String filePath,String fileName,String sheetName,S
 	
 	public void getOrderId() throws IOException {
 		
-		String order = driver.findElement(orderId).getText();
+		String order = driver.findElement(orderNumber).getText();
+		//System.out.println(order);
 		writeOrderInExcel(System.getProperty("user.dir")+"//src//test//resources","WriteExcel.xlsx","OrderDetails",order);
 	}
 

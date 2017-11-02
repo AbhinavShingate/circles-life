@@ -41,9 +41,7 @@ public class TS003_ProcessOrderOnAdminPortal {
 	@Test
 	public void approveDocument() throws InterruptedException, AWTException {
 		
-		
-		
-		
+					
 	}
 	
 

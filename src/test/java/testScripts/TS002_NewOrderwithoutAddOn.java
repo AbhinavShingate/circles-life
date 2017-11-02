@@ -71,8 +71,8 @@ public class TS002_NewOrderwithoutAddOn {
 		orderSummaryPage.clickOnPayNow();
 		Thread.sleep(2000);
 		paymentPage.enterCreditCardDetils();
-		Thread.sleep(7000);
-		
+		Thread.sleep(20000);
+		thankYouPage.getOrderId();
 		
     }
     
