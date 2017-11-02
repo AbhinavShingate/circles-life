@@ -1,6 +1,7 @@
 package testScripts;
 
 import java.awt.AWTException;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ import pageLibrary.OrderSummaryPage;
 import pageLibrary.PaymentPage;
 import pageLibrary.PlanPage;
 import pageLibrary.PreCheckoutPage;
+import pageLibrary.ThankYouPage;
 
 @Test
 public class TS002_NewOrderwithoutAddOn {
@@ -28,6 +30,7 @@ public class TS002_NewOrderwithoutAddOn {
 	DeliveryInfoPage deliveryInfoPage;
 	OrderSummaryPage orderSummaryPage;
 	PaymentPage paymentPage;
+	ThankYouPage thankYouPage;
 	
     @BeforeClass
     void Setup() {
@@ -38,7 +41,7 @@ public class TS002_NewOrderwithoutAddOn {
     }
     
     @Test(description ="This TC will verify Successfull login")
-    void VerifyLogin() {
+    void VerifyLogin() throws IOException {
     	logIn = new Login(driver);
 		logIn.enterEmailAddress();
 		logIn.enterPassword();
@@ -47,23 +50,29 @@ public class TS002_NewOrderwithoutAddOn {
     }
     
     @Test
-    void newOrderWithoutAddOn() throws InterruptedException, AWTException {
+    void newOrderWithoutAddOn() throws InterruptedException, AWTException, IOException {
     	planPage = new PlanPage(driver);
     	chooseNumberPage = new ChooseNumberPage(driver);
     	preCheckoutPage = new PreCheckoutPage(driver);
     	deliveryInfoPage = new DeliveryInfoPage(driver);
     	orderSummaryPage = new OrderSummaryPage(driver);
     	paymentPage = new PaymentPage(driver);
+    	thankYouPage = new ThankYouPage(driver);
     	
     	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	planPage.clickOnKeepOldNumber();
     	chooseNumberPage.getAGoldenNumber();
         planPage.clickOnBuyThisPlan();
+        preCheckoutPage.getNumber();
 		preCheckoutPage.clickOnSecureCheckout();
+		Thread.sleep(2000);
+		//preCheckoutPage.getNumber();
 		deliveryInfoPage.enterDeliveryInfo();
 		orderSummaryPage.clickOnPayNow();
 		Thread.sleep(2000);
 		paymentPage.enterCreditCardDetils();
+		Thread.sleep(7000);
+		
 		
     }
     

@@ -1,5 +1,6 @@
 package testScripts;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -33,18 +34,19 @@ public class TS001_LoginExistingCustomer {
 	}
 	
 	@Test(description= "this TC will verify Successfull login")
-	public void testLogin() {
+	public void testLogin() throws IOException {
 		logIn = new Login(driver);
 		logIn.enterEmailAddress();
 		logIn.enterPassword();
 		logIn.clickOnSignIn();
-			
+				
 	}
 	
 	@Test(description = "this TC will verify Company logo should be present")
 	public void verifyLogoIsPresent() {
 		logIn =  new Login(driver);
 		driver.findElement(By.xpath(".//*[@id='st-container']/div/div/div[1]/div/div/div[1]/a/img")).isDisplayed();
+		
 		
 	}
 	

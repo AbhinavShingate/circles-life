@@ -13,23 +13,19 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class PreCheckoutPage {
 
+public class ThankYouPage {
+	
 	WebDriver driver;
 	
-	By secureCheckout = By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/footer/div/div/div/a");
-	By takeNumber = By.cssSelector(".col-lg-12 .hidden-small-device .row:nth-child(2) .col-xs-8 > span");
+	By orderId = By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/div/div[2]/div/div/div/div/div[4]/div/span[2]");
 	
-	public PreCheckoutPage(WebDriver driver) {
+	public ThankYouPage(WebDriver driver) {
+		
 		this.driver = driver;
 	}
 	
-	public void clickOnSecureCheckout() {
-		
-		driver.findElement(secureCheckout).click();
-	}
-	
-	public void writeNumberInExcel(String filePath,String fileName,String sheetName,String dataToWrite) throws IOException{
+public void writeOrderInExcel(String filePath,String fileName,String sheetName,String dataToWrite) throws IOException{
 		
 		File file = new File(filePath+"//"+fileName);
 		FileInputStream inputStream = new FileInputStream(file);
@@ -53,7 +49,7 @@ public class PreCheckoutPage {
 		int rowCount = OrderDetails.getLastRowNum()-OrderDetails.getFirstRowNum();
 		Row row = OrderDetails.getRow(1);
 		Row newRow = OrderDetails.createRow(rowCount+1);
-		Cell cell = newRow.createCell(0);
+		Cell cell = newRow.createCell(1);
 		
 		cell.setCellValue(dataToWrite);
 		/*for(int j = 0; j < row.getLastCellNum(); j++){
@@ -70,11 +66,11 @@ public class PreCheckoutPage {
 
 	}
 	
-	public void getNumber() throws IOException {
-		String number = driver.findElement(takeNumber).getText();
-		//System.out.println(number);
-		writeNumberInExcel(System.getProperty("user.dir")+"//src//test//resources","WriteExcel.xlsx","OrderDetails",number);
-		
-	}
 	
+	public void getOrderId() throws IOException {
+		
+		String order = driver.findElement(orderId).getText();
+		writeOrderInExcel(System.getProperty("user.dir")+"//src//test//resources","WriteExcel.xlsx","OrderDetails",order);
+	}
+
 }

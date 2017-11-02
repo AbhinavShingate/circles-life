@@ -16,6 +16,16 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 public class DeliveryInfoPage {
 	
@@ -29,7 +39,8 @@ public class DeliveryInfoPage {
 	By houseNo = By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/div[2]/div/div/div/div[2]/div[2]/div[2]/div[2]/div/div[1]/div/div/div/div/div[2]/input");
 	By streetName = By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/div[2]/div/div/div/div[2]/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div[2]/input");
 	By delivaryDay = By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/div[2]/div/div/div/div[2]/div[2]/div[2]/div[4]/div[1]/div[2]/div[4]/div");
-	By deliveryTime = By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/div[2]/div/div/div/div[2]/div[2]/div[2]/div[4]/div[2]/div/div[1]/div/span/span[3]");
+	By deliveryTime = By.cssSelector(".row .delivery-slots-time:nth-child(1)");
+	//By deliveryTime = By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/div[2]/div/div/div/div[2]/div[2]/div[2]/div[4]/div[2]/div/div[1]/div/span/span[3]");
 	By idType= By.xpath("html/body/div[3]/div/div/div[1]/div/div/div[2]/span/div/div[2]/div/div/div/div[4]/div[2]/div[1]/div/div/select");
 	By frontImage = By.cssSelector("#st-container > div > div > div:nth-child(2) > span > div > div:nth-child(2) > div > div > div > div:nth-child(4) > div:nth-child(2) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1) > div");
 	By backImage = By.cssSelector("#st-container > div > div > div:nth-child(2) > span > div > div:nth-child(2) > div > div > div > div:nth-child(4) > div:nth-child(2) > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) > div");
@@ -96,23 +107,59 @@ public class DeliveryInfoPage {
 		
 	}
 	
-	public void enterDeliveryInfo() throws InterruptedException, AWTException {
-		driver.findElement(fullName).sendKeys("Testing");
-		driver.findElement(contactNmber).sendKeys("88378826");
+public void readDeliveryExcel(String filePath, String fileName, String sheetName) throws IOException{
+		
+		File file = new File(filePath+"//"+fileName);
+		FileInputStream inputStream = new FileInputStream(file);
+		Workbook readWorkbook = null;
+		
+		String fileExtensionName = fileName.substring(fileName.indexOf("."));
+		
+		if(fileExtensionName.equals(".xlsx")){
+
+		     readWorkbook = new XSSFWorkbook(inputStream);
+
+		    }
+		
+		else if(fileExtensionName.equals(".xls")){
+
+	         readWorkbook = new HSSFWorkbook(inputStream);
+	    }
+		
+		Sheet readSheet = readWorkbook.getSheet(sheetName);
+		
+			
+		String fullName1 = readSheet.getRow(1).getCell(0).getStringCellValue();
+		Double contactNumber1 = readSheet.getRow(1).getCell(1).getNumericCellValue();
+		Double postalCode1 = readSheet.getRow(1).getCell(2).getNumericCellValue();
+		String houseNo1 = readSheet.getRow(1).getCell(3).getStringCellValue();
+		String streetName1 = readSheet.getRow(1).getCell(4).getStringCellValue();
+		String nirc1 = readSheet.getRow(1).getCell(5).getStringCellValue();
+		driver.findElement(fullName).sendKeys(fullName1);
+		driver.findElement(contactNmber).sendKeys(contactNumber1.toString());
 		selectDob();
-		driver.findElement(postalCode).sendKeys("555231");;
-		driver.findElement(houseNo).sendKeys("34R");
-		driver.findElement(streetName).sendKeys("MG Road");
+		driver.findElement(postalCode).sendKeys(postalCode1.toString());
+		driver.findElement(houseNo).sendKeys(houseNo1);
+		driver.findElement(streetName).sendKeys(streetName1);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		WebElement id = driver.findElement(idType);
 		Select dropdownIdType = new Select(id);
 		dropdownIdType.selectByIndex(1);
-		driver.findElement(nic).sendKeys("S1467255I");
+		driver.findElement(nic).sendKeys(nirc1);
+		
+		//driver.findElement(emailAddress).sendKeys(userName);
+		//driver.findElement(password).sendKeys(password1);
+		
+				
+	}
+	
+	public void enterDeliveryInfo() throws InterruptedException, AWTException, IOException {
+		String filePath = System.getProperty("user.dir")+"//src//test//resources";
+		readDeliveryExcel(filePath, "ReadExcel.xlsx", "DeliverySheet");
+		
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		Thread.sleep(3000);
 		driver.findElement(delivaryDay).click();
-		//Wait wait = new WebDriverWait(driver, 10);
-		//wait.until(ExpectedConditions.elementToBeClickable(deliveryTime));
 		Thread.sleep(3000);
 		driver.findElement(deliveryTime).click();
 	    uploadFrontAndBackImage();
