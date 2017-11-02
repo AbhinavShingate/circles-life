@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="106708" started-at="2017-11-02T08:39:28Z" finished-at="2017-11-02T08:41:15Z">
+  <suite name="Default suite" duration-ms="183142" started-at="2017-11-02T08:48:50Z" finished-at="2017-11-02T08:51:53Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="106708" started-at="2017-11-02T08:39:28Z" finished-at="2017-11-02T08:41:15Z">
+    <test name="Default test" duration-ms="183142" started-at="2017-11-02T08:48:50Z" finished-at="2017-11-02T08:51:53Z">
       <class name="testScripts.TS002_NewOrderwithoutAddOn">
-        <test-method status="PASS" signature="Setup()[pri:0, instance:testScripts.TS002_NewOrderwithoutAddOn@7318daf8]" name="Setup" is-config="true" duration-ms="23785" started-at="2017-11-02T14:09:28Z" finished-at="2017-11-02T14:09:52Z">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:testScripts.TS002_NewOrderwithoutAddOn@5c7fa833]" name="Setup" is-config="true" duration-ms="101464" started-at="2017-11-02T14:18:50Z" finished-at="2017-11-02T14:20:31Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="VerifyLogin()[pri:0, instance:testScripts.TS002_NewOrderwithoutAddOn@7318daf8]" name="VerifyLogin" duration-ms="1712" started-at="2017-11-02T14:09:52Z" description="This TC will verify Successfull login" finished-at="2017-11-02T14:09:54Z">
+        <test-method status="PASS" signature="VerifyLogin()[pri:0, instance:testScripts.TS002_NewOrderwithoutAddOn@5c7fa833]" name="VerifyLogin" duration-ms="1858" started-at="2017-11-02T14:20:31Z" description="This TC will verify Successfull login" finished-at="2017-11-02T14:20:33Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyLogin -->
-        <test-method status="PASS" signature="newOrderWithoutAddOn()[pri:0, instance:testScripts.TS002_NewOrderwithoutAddOn@7318daf8]" name="newOrderWithoutAddOn" duration-ms="81177" started-at="2017-11-02T14:09:54Z" finished-at="2017-11-02T14:11:15Z">
+        <test-method status="PASS" signature="newOrderWithoutAddOn()[pri:0, instance:testScripts.TS002_NewOrderwithoutAddOn@5c7fa833]" name="newOrderWithoutAddOn" duration-ms="79804" started-at="2017-11-02T14:20:33Z" finished-at="2017-11-02T14:21:53Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- newOrderWithoutAddOn -->

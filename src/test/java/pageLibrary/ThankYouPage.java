@@ -50,15 +50,9 @@ public void writeOrderInExcel(String filePath,String fileName,String sheetName,S
 		int rowCount = OrderDetails.getLastRowNum()-OrderDetails.getFirstRowNum();
 		Row row = OrderDetails.getRow(1);
 		Row newRow = OrderDetails.createRow(rowCount+1);
-		Cell cell = newRow.createCell(1);
+		Cell cell = newRow.createCell(0);
 		
 		cell.setCellValue(dataToWrite);
-		/*for(int j = 0; j < row.getLastCellNum(); j++){
-
-	        Cell cell = newRow.createCell(j);
-
-	        cell.setCellValue(dataToWrite);
-	    }*/
 		inputStream.close();
 		FileOutputStream outputStream = new FileOutputStream(file);
 		writeExcel.write(outputStream);
@@ -71,7 +65,6 @@ public void writeOrderInExcel(String filePath,String fileName,String sheetName,S
 	public void getOrderId() throws IOException {
 		
 		String order = driver.findElement(orderNumber).getText();
-		//System.out.println(order);
 		writeOrderInExcel(System.getProperty("user.dir")+"//src//test//resources","WriteExcel.xlsx","OrderDetails",order);
 	}
 

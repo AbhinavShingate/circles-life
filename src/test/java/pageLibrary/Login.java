@@ -21,10 +21,7 @@ public class Login {
 	By password = By.name("password");
 	By signIn = By.xpath(".//*[@id='st-container']/div/div/div[2]/div[1]/div[2]/div/div/div[2]/div/div[3]/form/div[4]/div/div/button");
 	By companyLogo = By.xpath(".//*[@id='st-container']/div/div/div[1]/div/div/div[1]/a/img");
-	//WebElement emailAddress = driver.findElement(By.name("email"));
-	//WebElement password = driver.findElement(By.name("password"));
-	//WebElement signINButton = driver.findElement(By.xpath(".//*[@id='st-container']/div/div/div[2]/div[1]/div[2]/div/div/div[2]/div/div[3]/form/div[4]/div/div/button"));
-    
+	
 	public void readExcel(String filePath, String fileName, String sheetName) throws IOException{
 		
 		File file = new File(filePath+"//"+fileName);
@@ -78,8 +75,7 @@ public class Login {
 	public void enterEmailAddress() throws IOException {
 		String filePath = System.getProperty("user.dir")+"//src//test//resources";
 		readExcel(filePath, "ReadExcel.xlsx", "LoginSheet");
-		//driver.findElement(emailAddress).sendKeys("abhinavvelotiotestmail@gmail.com");
-		
+			
 	}
     
 	public void enterPassword() {
